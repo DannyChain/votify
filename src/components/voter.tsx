@@ -120,7 +120,7 @@ const Voter: React.FC<Voter> = ({ username }) => {
         . <br /> Please consider voting for my Hive-Engine Witness if you like
         this tool:{" "}
         <a href="/">
-          <strong> voter.com</strong>
+          <strong> @DannyChain</strong>
         </a>
       </footer>
     </div>
