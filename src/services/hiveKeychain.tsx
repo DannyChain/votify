@@ -32,6 +32,5 @@ export async function requestCustomJson(
     ""
   );
 
-  console.log(response);
   return response;
 }
