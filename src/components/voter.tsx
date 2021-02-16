@@ -58,7 +58,13 @@ const Voter: React.FC<Voter> = ({ username }) => {
 
         <h1 className={styles.title}>
           Vote for{" "}
-          <a href="https://nextjs.org">{userProfile.name || "DannyChain"}</a>
+          <a
+            href={`https://peakd.com/@${username}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {username || "dannychain"}
+          </a>
         </h1>
 
         <p className={styles.description}>
