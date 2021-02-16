@@ -32,6 +32,12 @@ const Voter: React.FC<IUserProps> = ({ username, userdata }) => {
     setUserProfile(profile);
   }
 
+  const customJson = JSON.stringify({
+    contractName: "witnesses",
+    contractAction: "approve",
+    contractPayload: { witness: username },
+  });
+
   return (
     <div className={styles.container}>
       <Head>
@@ -80,17 +86,23 @@ const Voter: React.FC<IUserProps> = ({ username, userdata }) => {
 
         <h2>Vote using:</h2>
 
-        <button
-          className={styles.card}
-          onClick={async () => {
-            const request = await requestCustomJson(
-              $("#sign_username").val(),
-              username
-            );
-          }}
-        >
-          <h3>Hive Keychain</h3>
-        </button>
+        <span className={styles.center}>
+          <button
+            className={styles.card}
+            onClick={async () => {
+              await requestCustomJson($("#sign_username").val(), username);
+            }}
+          >
+            Hive Keychain
+          </button>
+          <a
+            href={`https://hivesigner.com/sign/custom-json?authority=active&id=ssc-mainnet-hive&json=${encodeURIComponent(
+              customJson
+            )}&redirect_uri=https://he-voter.vercel.app/${username}`}
+          >
+            <button className={styles.card}>Hivesigner</button>
+          </a>
+        </span>
       </main>
 
       <footer className={styles.footer}>
