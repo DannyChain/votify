@@ -1,12 +1,16 @@
 import { useState } from "react";
 import Head from "next/head";
 
-import { client } from "../services/dhive";
 import { requestCustomJson } from "../services/hiveKeychain";
 import styles from "../styles/Home.module.css";
 
-interface Voter {
-  username: string | string[];
+interface IUserProps {
+  username: string;
+  userdata: IUserData;
+}
+
+interface IUserData {
+  posting_json_metadata: string;
 }
 
 interface IUserProfile {
@@ -15,26 +19,17 @@ interface IUserProfile {
   profile_image: string;
 }
 
-const getUserData = async (user) => {
-  if (user) {
-    const data = await client.database.call("get_accounts", [[user]]);
-    return data[0];
-  }
-};
+const Voter: React.FC<IUserProps> = ({ username, userdata }) => {
+  const [userProfile, setUserProfile] = useState<IUserProfile>({
+    name: "",
+    about: "",
+    profile_image: "",
+  } as IUserProfile);
 
-const Voter: React.FC<Voter> = ({ username }) => {
-  const [userProfile, setUserProfile] = useState<IUserProfile>(
-    {} as IUserProfile
-  );
-
-  if (username) {
-    getUserData(username).then((userdata) => {
-      if (userdata) {
-        const postingJsonMetadata = userdata.posting_json_metadata;
-        const { profile } = JSON.parse(postingJsonMetadata);
-        return setUserProfile(profile);
-      }
-    });
+  if (userProfile.name === "") {
+    const postingJsonMetadata = userdata.posting_json_metadata;
+    const { profile } = JSON.parse(postingJsonMetadata);
+    setUserProfile(profile);
   }
 
   return (
