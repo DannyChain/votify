@@ -13,6 +13,8 @@ class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          <script src="/jquery-3.5.1.min.js"></script>
+          <script src="/custom.js?v=a"></script>
         </body>
       </Html>
     );
