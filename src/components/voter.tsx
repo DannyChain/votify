@@ -16,7 +16,6 @@ interface IUserData {
 interface IUserProfile {
   name: string;
   about: string;
-  profile_image: string;
   witness_owner?: string;
 }
 
@@ -24,7 +23,6 @@ const Voter: React.FC<IUserProps> = ({ username, userdata }) => {
   const [userProfile, setUserProfile] = useState<IUserProfile>({
     name: "",
     about: "",
-    profile_image: "",
     witness_owner: "",
   } as IUserProfile);
 
@@ -53,7 +51,7 @@ const Voter: React.FC<IUserProps> = ({ username, userdata }) => {
 
       <main className={styles.main}>
         <img
-          src={userProfile.profile_image}
+          src={`https://images.hive.blog/u/${username}/avatar/large`}
           width="200px"
           height="200px"
           style={{ borderRadius: "50%" }}
