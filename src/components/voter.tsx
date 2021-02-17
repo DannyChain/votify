@@ -107,7 +107,6 @@ const Voter: React.FC<IUserProps> = ({ username, userdata }) => {
         <input
           id="sign_username"
           className={styles.input}
-          style={{ width: "50%" }}
           placeholder="Your Username"
         />
 
