@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Head from "next/head";
 
+import { findWitness, getVersion } from "../services/hiveEngine";
 import { requestCustomJson } from "../services/hiveKeychain";
 import styles from "../styles/Home.module.css";
 
@@ -19,6 +20,18 @@ interface IUserProfile {
   witness_owner?: string;
 }
 
+interface IWitnessInfo {
+  ip: string;
+  approvalWeight: string;
+  enabled: boolean;
+  lastBlockVerified: number;
+  lastRoundVerified: number;
+  missedRounds: number;
+  rpcPort: number;
+  version?: string;
+  isWitness?: boolean;
+}
+
 const Voter: React.FC<IUserProps> = ({ username, userdata }) => {
   const [userProfile, setUserProfile] = useState<IUserProfile>({
     name: "",
@@ -26,10 +39,69 @@ const Voter: React.FC<IUserProps> = ({ username, userdata }) => {
     witness_owner: "",
   } as IUserProfile);
 
+  const [witnessInfo, setWitnessInfo] = useState<IWitnessInfo>({
+    ip: "",
+    rpcPort: 0,
+    approvalWeight: "",
+    enabled: false,
+    lastBlockVerified: 0,
+    lastRoundVerified: 0,
+    missedRounds: 0,
+    version: "",
+    isWitness: false,
+  } as IWitnessInfo);
+
   if (userProfile.name === "") {
     const postingJsonMetadata = userdata.posting_json_metadata;
     const { profile } = JSON.parse(postingJsonMetadata);
     setUserProfile(profile);
+  }
+
+  if (witnessInfo.ip === "") {
+    findWitness(username).then((witness) => {
+      if (witness === undefined) {
+        return;
+      }
+
+      const {
+        IP,
+        approvalWeight: { $numberDecimal },
+        enabled,
+        lastBlockVerified,
+        lastRoundVerified,
+        missedRounds,
+        RPCPort,
+      } = witness;
+
+      if (enabled) {
+        getVersion(IP, RPCPort).then((nodeInfo) => {
+          const { SSCnodeVersion } = nodeInfo;
+
+          setWitnessInfo({
+            ip: IP,
+            approvalWeight: $numberDecimal,
+            enabled,
+            lastBlockVerified,
+            lastRoundVerified,
+            missedRounds,
+            rpcPort: RPCPort,
+            version: SSCnodeVersion,
+            isWitness: true,
+          });
+        });
+      } else {
+        setWitnessInfo({
+          ip: IP,
+          approvalWeight: $numberDecimal,
+          enabled,
+          lastBlockVerified,
+          lastRoundVerified,
+          missedRounds,
+          isWitness: true,
+          rpcPort: RPCPort,
+        });
+      }
+    });
   }
 
   const owners = userProfile.witness_owner?.split(",");
@@ -70,6 +142,31 @@ const Voter: React.FC<IUserProps> = ({ username, userdata }) => {
           </a>
         </h1>
 
+        {witnessInfo.enabled ? (
+          <code className={styles.code}>
+            <strong>Node:</strong> {witnessInfo.ip}:{witnessInfo.rpcPort} |{" "}
+            <strong>Approval Weight:</strong> {witnessInfo.approvalWeight}{" "}
+            WORKERBEE | <strong>Enabled:</strong>{" "}
+            <input type="checkbox" readOnly checked={witnessInfo.enabled} />{" "}
+            <br />
+            <strong>Last Block:</strong>{" "}
+            <a
+              href={`https://he.dtools.dev/b/${witnessInfo.lastBlockVerified}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {witnessInfo.lastBlockVerified}
+            </a>{" "}
+            | <strong>Last Round:</strong> {witnessInfo.lastRoundVerified} |{" "}
+            <strong>Missed Rounds:</strong> {witnessInfo.missedRounds} |{" "}
+            <strong>Version:</strong> {witnessInfo.version}
+          </code>
+        ) : (
+          <code className={styles.code}>
+            <strong>Witness currently disabled.</strong>
+          </code>
+        )}
+
         <div className={styles.center}>
           {userProfile.witness_owner ? (
             <span className={styles.small}>
@@ -92,41 +189,43 @@ const Voter: React.FC<IUserProps> = ({ username, userdata }) => {
           ) : (
             <div />
           )}
-
           <p className={styles.description}>{userProfile.about}</p>
-
-          {/*<br />
-          <br />
-          <code className={styles.code}>
-            Last Block: 51379809 | Weight: XXX WORKERBEE | Version: 1.24.2
-          </code>*/}
         </div>
 
-        <input
-          id="sign_username"
-          className={styles.input}
-          placeholder="Your Username"
-        />
+        {witnessInfo.isWitness ? (
+          <span className={styles.center}>
+            <input
+              id="sign_username"
+              className={styles.input}
+              placeholder="Your Username"
+            />
 
-        <h2>Vote using:</h2>
+            <h2>Vote using:</h2>
 
-        <span className={styles.center}>
-          <button
-            className={styles.card}
-            onClick={async () => {
-              await requestCustomJson($("#sign_username").val(), username);
-            }}
-          >
-            Hive Keychain
-          </button>
-          <a
-            href={`https://hivesigner.com/sign/custom-json?authority=active&id=ssc-mainnet-hive&json=${encodeURIComponent(
-              customJson
-            )}&redirect_uri=https://he-voter.vercel.app/${username}`}
-          >
-            <button className={styles.card}>Hivesigner</button>
-          </a>
-        </span>
+            <button
+              className={styles.card}
+              onClick={async () => {
+                await requestCustomJson($("#sign_username").val(), username);
+              }}
+            >
+              Hive Keychain
+            </button>
+            <a
+              href={`https://hivesigner.com/sign/custom-json?authority=active&id=ssc-mainnet-hive&json=${encodeURIComponent(
+                customJson
+              )}&redirect_uri=https://he-voter.vercel.app/${username}`}
+            >
+              <button className={styles.card}>Hivesigner</button>
+            </a>
+          </span>
+        ) : (
+          <span className={styles.center}>
+            <p className={styles.code}>
+              You can't vote for this account as they are not a Hive-Engine
+              Witness!
+            </p>
+          </span>
+        )}
       </main>
 
       <footer className={styles.footer}>
