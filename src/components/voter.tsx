@@ -17,6 +17,7 @@ interface IUserProfile {
   name: string;
   about: string;
   profile_image: string;
+  witness_owner?: string;
 }
 
 const Voter: React.FC<IUserProps> = ({ username, userdata }) => {
@@ -24,6 +25,7 @@ const Voter: React.FC<IUserProps> = ({ username, userdata }) => {
     name: "",
     about: "",
     profile_image: "",
+    witness_owner: "",
   } as IUserProfile);
 
   if (userProfile.name === "") {
@@ -31,6 +33,8 @@ const Voter: React.FC<IUserProps> = ({ username, userdata }) => {
     const { profile } = JSON.parse(postingJsonMetadata);
     setUserProfile(profile);
   }
+
+  const owners = userProfile.witness_owner?.split(",");
 
   const customJson = JSON.stringify({
     contractName: "witnesses",
@@ -50,8 +54,8 @@ const Voter: React.FC<IUserProps> = ({ username, userdata }) => {
       <main className={styles.main}>
         <img
           src={userProfile.profile_image}
-          width="256px"
-          height="256px"
+          width="200px"
+          height="200px"
           style={{ borderRadius: "50%" }}
         />
 
@@ -68,14 +72,37 @@ const Voter: React.FC<IUserProps> = ({ username, userdata }) => {
           </a>
         </h1>
 
-        <p className={styles.description}>
-          {userProfile.about}
+        <div className={styles.center}>
+          {userProfile.witness_owner ? (
+            <span className={styles.small}>
+              Witness by
+              {owners.map((owner) => {
+                return (
+                  <span key={owner}>
+                    {" "}
+                    <a
+                      href={`https://peakd.com/@${owner}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {owner}
+                    </a>
+                  </span>
+                );
+              })}
+            </span>
+          ) : (
+            <div />
+          )}
+
+          <p className={styles.description}>{userProfile.about}</p>
+
           {/*<br />
           <br />
           <code className={styles.code}>
             Last Block: 51379809 | Weight: XXX WORKERBEE | Version: 1.24.2
           </code>*/}
-        </p>
+        </div>
 
         <input
           id="sign_username"
