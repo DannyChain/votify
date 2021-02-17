@@ -17,8 +17,6 @@ const Home: React.FC<IUserProps> = ({ username, userdata }) => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  // const { username } = context.params;
-
   const username = "dannychain";
 
   const userdata = await client.database.call("get_accounts", [[username]]);

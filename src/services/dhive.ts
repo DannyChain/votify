@@ -1,8 +1,10 @@
 import { Client } from "@hiveio/dhive";
 
 const opts = {
-  addressPrefix: "STM",
-  chainId: "beeab0de00000000000000000000000000000000000000000000000000000000",
+  addressPrefix: process.env.HIVE_ADDRESS_PREFIX || "STM",
+  chainId:
+    process.env.HIVE_CHAIN_ID ||
+    "beeab0de00000000000000000000000000000000000000000000000000000000",
 };
 
 export const client = new Client(

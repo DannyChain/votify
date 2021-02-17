@@ -1,4 +1,6 @@
-const node = "http://35.188.146.63:5000";
+const node = `http://${process.env.WITNESS_NODE_IP || "35.188.146.63"}:${
+  process.env.WITNESS_NODE_PORT || "5000"
+}`;
 
 export const findWitness = async (witness) => {
   const res = await fetch(`${node}/contracts`, {
@@ -22,7 +24,7 @@ export const getVersion = async (IP, RPCPort) => {
     headers: {
       "content-type": "application/json",
     },
-    body: '{"jsonrpc":"2.0","id":10,"method":"getStatus","params":{}}',
+    body: '{"jsonrpc":"2.0","id":9,"method":"getStatus","params":{}}',
     method: "POST",
   });
 
