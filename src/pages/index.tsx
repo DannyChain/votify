@@ -3,14 +3,8 @@ import { GetStaticProps } from "next";
 import Voter from "../components/voter";
 import { client } from "../services/dhive";
 
-interface IUserProps {
-  username: string;
-  userdata: IUserData;
-}
 
-interface IUserData {
-  posting_json_metadata: string;
-}
+import { IUserProps } from "../interfaces/general";
 
 const Home: React.FC<IUserProps> = ({ username, userdata }) => {
   return <Voter username={username} userdata={userdata} />;

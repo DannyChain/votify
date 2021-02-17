@@ -5,14 +5,8 @@ import Voter from "../components/voter";
 import Loading from "../components/loading";
 import { client } from "../services/dhive";
 
-interface IUserProps {
-  username: string;
-  userdata: IUserData;
-}
 
-interface IUserData {
-  posting_json_metadata: string;
-}
+import { IUserProps } from "../interfaces/general";
 
 const Witness: React.FC<IUserProps> = ({ username, userdata }) => {
   const { isFallback } = useRouter();
