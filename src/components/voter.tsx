@@ -5,32 +5,7 @@ import { findWitness, getVersion } from "../services/hiveEngine";
 import { requestCustomJson } from "../services/hiveKeychain";
 import styles from "../styles/Home.module.css";
 
-interface IUserProps {
-  username: string;
-  userdata: IUserData;
-}
-
-interface IUserData {
-  posting_json_metadata: string;
-}
-
-interface IUserProfile {
-  name: string;
-  about: string;
-  witness_owner?: string;
-}
-
-interface IWitnessInfo {
-  ip: string;
-  approvalWeight: string;
-  enabled: boolean;
-  lastBlockVerified: number;
-  lastRoundVerified: number;
-  missedRounds: number;
-  rpcPort: number;
-  version?: string;
-  isWitness?: boolean;
-}
+import { IUserProps, IUserProfile } from "../interfaces/general";
 
 const Voter: React.FC<IUserProps> = ({ username, userdata }) => {
   const [userProfile, setUserProfile] = useState<IUserProfile>({
