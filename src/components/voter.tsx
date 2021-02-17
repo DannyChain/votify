@@ -123,7 +123,9 @@ const Voter: React.FC<IUserProps> = ({ username, userdata }) => {
 
       <main className={styles.main}>
         <img
-          src={`https://images.hive.blog/u/${username}/avatar/large`}
+          src={`https://${
+            process.env.HIVE_IMAGE_PROXY || "images.ecency.com"
+          }/u/${username}/avatar/large`}
           width="200px"
           height="200px"
           style={{ borderRadius: "50%" }}
@@ -213,7 +215,9 @@ const Voter: React.FC<IUserProps> = ({ username, userdata }) => {
             <a
               href={`https://hivesigner.com/sign/custom-json?authority=active&id=ssc-mainnet-hive&json=${encodeURIComponent(
                 customJson
-              )}&redirect_uri=https://he-voter.vercel.app/${username}`}
+              )}&redirect_uri=https://${
+                process.env.VOTER_WEBSITE_URL || "he-voter.vercel.app"
+              }/${username}`}
             >
               <button className={styles.card}>Hivesigner</button>
             </a>

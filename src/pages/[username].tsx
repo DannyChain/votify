@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import Voter from "../components/voter";
 import Loading from "../components/loading";
 import { client } from "../services/dhive";
-import styles from "../styles/Home.module.css";
 
 interface IUserProps {
   username: string;
