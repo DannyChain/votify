@@ -9,12 +9,12 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## Features
 
 - [x] **Webpage**
-  - [x] Pre-Build Witnesses (from https://votify.now.sh/api/witnessList) pages, saving render time - 9973156b567beaf324abdde65075482ea3bbec3d
-  - [x] Stale and revalidate every page after 60 seconds - 63ca6e66fd1895cae777ceaa9bab3cb2e0306f1c
-  - [x] Show relevant witness information (Node IP, Approval Weight, Last Block, Version, etc) - ec8778ce17bc2997255c2a9c5d811a89d87e8d68
+  - [x] Pre-Build Witnesses (from https://votify.now.sh/api/witnessList) pages, saving render time
+  - [x] Stale and revalidate every page after 60 seconds
+  - [x] Show relevant witness information (Node IP, Approval Weight, Last Block, Version, etc)
   - [x] Hide voting buttons with user is not a hive-engine witness
-  - [x] Hive Keychain support - 93adacba423d57b225df215dc40c5697cbd91406
-  - [x] Hivesigner support - 1687aae73d7e065d16800f9c3bfe2916a601e25a
+  - [x] Hive Keychain support
+  - [x] Hivesigner support
 - [x] **API**
   - [x] Get Witness List: https://votify.now.sh/api/witnessList
   - [x] Get Witness Info: https://votify.now.sh/api/witnessInfo?witness=dannychain
