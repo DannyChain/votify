@@ -1,85 +1,17 @@
-import { useState } from "react";
 import Head from "next/head";
 
-import { findWitness, getVersion } from "../services/hiveEngine";
 import { requestCustomJson } from "../services/hiveKeychain";
 import styles from "../styles/Home.module.css";
 
-import { IUserProps, IUserProfile } from "../interfaces/general";
+import { IUserProps } from "../interfaces/general";
 
-const Voter: React.FC<IUserProps> = ({ username, userdata }) => {
-  const [userProfile, setUserProfile] = useState<IUserProfile>({
-    name: "",
-    about: "",
-    witness_owner: "",
-  } as IUserProfile);
-
-  const [witnessInfo, setWitnessInfo] = useState<IWitnessInfo>({
-    ip: "",
-    rpcPort: 0,
-    approvalWeight: "",
-    enabled: false,
-    lastBlockVerified: 0,
-    lastRoundVerified: 0,
-    missedRounds: 0,
-    version: "",
-    isWitness: false,
-  } as IWitnessInfo);
-
-  if (userProfile.name === "") {
-    const postingJsonMetadata = userdata.posting_json_metadata;
-    const { profile } = JSON.parse(postingJsonMetadata);
-    setUserProfile(profile);
-  }
-
-  if (witnessInfo.ip === "") {
-    findWitness(username).then((witness) => {
-      if (witness === undefined) {
-        return;
-      }
-
-      const {
-        IP,
-        approvalWeight: { $numberDecimal },
-        enabled,
-        lastBlockVerified,
-        lastRoundVerified,
-        missedRounds,
-        RPCPort,
-      } = witness;
-
-      if (enabled) {
-        getVersion(IP, RPCPort).then((nodeInfo) => {
-          const { SSCnodeVersion } = nodeInfo;
-
-          setWitnessInfo({
-            ip: IP,
-            approvalWeight: $numberDecimal,
-            enabled,
-            lastBlockVerified,
-            lastRoundVerified,
-            missedRounds,
-            rpcPort: RPCPort,
-            version: SSCnodeVersion,
-            isWitness: true,
-          });
-        });
-      } else {
-        setWitnessInfo({
-          ip: IP,
-          approvalWeight: $numberDecimal,
-          enabled,
-          lastBlockVerified,
-          lastRoundVerified,
-          missedRounds,
-          isWitness: true,
-          rpcPort: RPCPort,
-        });
-      }
-    });
-  }
-
-  const owners = userProfile.witness_owner?.split(",");
+const Voter: React.FC<IUserProps> = ({
+  username,
+  userdata,
+  witnessInfo,
+  witnessStatus,
+}) => {
+  const owners = userdata.witness_owner?.split(",");
 
   const customJson = JSON.stringify({
     contractName: "witnesses",
@@ -90,9 +22,7 @@ const Voter: React.FC<IUserProps> = ({ username, userdata }) => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>
-          Vote on @{username || "dannychain"} for Hive-Engine Witness
-        </title>
+        <title>Vote on @{username} for Hive-Engine Witness</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -115,15 +45,16 @@ const Voter: React.FC<IUserProps> = ({ username, userdata }) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            {username || "dannychain"}
+            {username}
           </a>
         </h1>
 
         {witnessInfo.enabled ? (
           <code className={styles.code}>
-            <strong>Node:</strong> {witnessInfo.ip}:{witnessInfo.rpcPort} |{" "}
-            <strong>Approval Weight:</strong> {witnessInfo.approvalWeight}{" "}
-            WORKERBEE | <strong>Enabled:</strong>{" "}
+            <strong>Node:</strong> {witnessInfo.IP}:{witnessInfo.RPCPort} |{" "}
+            <strong>Approval Weight:</strong>{" "}
+            {witnessInfo.approvalWeight.$numberDecimal} WORKERBEE |{" "}
+            <strong>Enabled:</strong>{" "}
             <input type="checkbox" readOnly checked={witnessInfo.enabled} />{" "}
             <br />
             <strong>Last Block:</strong>{" "}
@@ -136,16 +67,22 @@ const Voter: React.FC<IUserProps> = ({ username, userdata }) => {
             </a>{" "}
             | <strong>Last Round:</strong> {witnessInfo.lastRoundVerified} |{" "}
             <strong>Missed Rounds:</strong> {witnessInfo.missedRounds} |{" "}
-            <strong>Version:</strong> {witnessInfo.version}
+            <strong>Version:</strong> {witnessStatus.SSCnodeVersion}
           </code>
         ) : (
-          <code className={styles.code}>
-            <strong>Witness currently disabled.</strong>
-          </code>
+          <div>
+            {witnessInfo ? (
+              <code className={styles.code}>
+                <strong>Witness currently disabled.</strong>
+              </code>
+            ) : (
+              ""
+            )}
+          </div>
         )}
 
         <div className={styles.center}>
-          {userProfile.witness_owner ? (
+          {userdata.witness_owner && witnessInfo ? (
             <span className={styles.small}>
               Witness by
               {owners.map((owner) => {
@@ -166,10 +103,11 @@ const Voter: React.FC<IUserProps> = ({ username, userdata }) => {
           ) : (
             <div />
           )}
-          <p className={styles.description}>{userProfile.about}</p>
+          <p className={styles.description}>{userdata.about}</p>
+          <br />
         </div>
 
-        {witnessInfo.isWitness ? (
+        {witnessInfo ? (
           <span className={styles.center}>
             <input
               id="sign_username"
@@ -190,9 +128,7 @@ const Voter: React.FC<IUserProps> = ({ username, userdata }) => {
             <a
               href={`https://hivesigner.com/sign/custom-json?authority=active&id=ssc-mainnet-hive&json=${encodeURIComponent(
                 customJson
-              )}&redirect_uri=https://${
-                process.env.VOTER_WEBSITE_URL || "he-voter.vercel.app"
-              }/${username}`}
+              )}&redirect_uri=https://votify.now.sh/${username}`}
             >
               <button className={styles.card}>Hivesigner</button>
             </a>
