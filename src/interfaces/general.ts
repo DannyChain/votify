@@ -1,6 +1,6 @@
 export interface IUserProps {
   username: string;
-  userdata: IUserData;
+  userdata: IUserProfile;
   witnessInfo: IWitnessInfo;
   witnessStatus: IWitnessStatus;
 }
