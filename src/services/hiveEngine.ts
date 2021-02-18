@@ -1,38 +1,47 @@
-const node = `http://${process.env.WITNESS_NODE_IP || "35.188.146.63"}:${
-  process.env.WITNESS_NODE_PORT || "5000"
-}`;
+export const getWitnessList = async () => {
+  try {
+    const data = await fetch(`https://votify.now.sh/api/witnessList`);
 
-export const findWitness = async (witness) => {
-  const res = await fetch(`${node}/contracts`, {
-    headers: {
-      "content-type": "application/json",
-    },
-    body:
-      '{"jsonrpc":"2.0","method":"find","params":{"contract":"witnesses","table":"witnesses","query":{"account":"' +
-      witness +
-      '"}},"id": 9}',
-    method: "POST",
-  });
+    const json = await data.json();
 
-  const response = (await res.json()).result;
+    const paths = json.map((path) => {
+      return {
+        params: {
+          username: path.account,
+        },
+      };
+    });
 
-  return response[0];
+    return paths;
+  } catch (error) {
+    return error;
+  }
 };
 
-export const getVersion = async (IP, RPCPort) => {
-  const res = await fetch(`http://${IP}:${RPCPort}/blockchain`, {
-    headers: {
-      "content-type": "application/json",
-    },
-    body: '{"jsonrpc":"2.0","id":9,"method":"getStatus","params":{}}',
-    method: "POST",
-  });
+export const getWitnessInfo = async (witness) => {
+  try {
+    const data = await fetch(
+      `https://votify.now.sh/api/witnessInfo?witness=${witness}`
+    );
 
-  const response = (await res.json()).result;
+    const json = await data.json();
 
-  return response;
+    return json[0];
+  } catch (error) {
+    return error;
+  }
 };
 
-export const outputData = async () => {};
+export const getWitnessStatus = async (witnessInfo) => {
+  try {
+    const data = await fetch(
+      `https://votify.now.sh/api/witnessStatus?ip=${witnessInfo.IP}&port=${witnessInfo.RPCPort}`
+    );
 
-export const main = async () => {};
+    const json = await data.json();
+
+    return json;
+  } catch (error) {
+    return "error";
+  }
+};
