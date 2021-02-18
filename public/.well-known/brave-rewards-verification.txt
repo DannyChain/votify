@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: votify.now.sh
+Token: c9221dcc8f294ca5f4ea51e3653a0ba34609c0ccbb2a0168325e43a679fc6b1d
