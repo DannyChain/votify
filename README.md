@@ -1,8 +1,26 @@
-# [Hive-Engine Voter](https://he-voter.vercel.app)
+# [Votify](https://votify.now.sh/)
+
+> Voting Page/Tool for Hive-Engine Witness.
 
 ![](/docs/screenshot1.jpg)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+## Features
+
+- [x] **Webpage**
+  - [x] Pre-Build Witnesses (from https://votify.now.sh/api/witnessList) pages, saving render time - 9973156b567beaf324abdde65075482ea3bbec3d
+  - [x] Stale and revalidate every page after 60 seconds - 63ca6e66fd1895cae777ceaa9bab3cb2e0306f1c
+  - [x] Show relevant witness information (Node IP, Approval Weight, Last Block, Version, etc) - ec8778ce17bc2997255c2a9c5d811a89d87e8d68
+  - [x] Hide voting buttons with user is not a hive-engine witness
+  - [x] Hive Keychain support - 93adacba423d57b225df215dc40c5697cbd91406
+  - [x] Hivesigner support - 1687aae73d7e065d16800f9c3bfe2916a601e25a
+- [x] **API**
+  - [x] Get Witness List: https://votify.now.sh/api/witnessList
+  - [x] Get Witness Info: https://votify.now.sh/api/witnessInfo?witness=dannychain
+  - [x] Get Witness Status: https://votify.now.sh/api/witnessStatus?ip=35.188.146.63&port=5000
+
+I did that API part mainly because the "mixed content" errors and warnings were bugging the hell out of me, so by using this "API" I could get a "secure" proxy so the browser would stop complaining about those errors.
 
 ## Getting Started
 
@@ -16,11 +34,11 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+You can start editing the page by modifying `src/pages/index.js`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `src/pages/api/hello.js`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+The `src/pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
 ## Learn More
 
