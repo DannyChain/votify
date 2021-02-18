@@ -1,0 +1,75 @@
+==================================================================
+https://keybase.io/dannychain
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://votify.now.sh
+  * I am dannychain (https://keybase.io/dannychain) on keybase.
+  * I have a public key with fingerprint 3579 364D 2FBE 7085 90A6  50B2 15F2 78C4 FF1C 5AA8
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0120c82468a2d015f9f21deff9623d6fcc24d9478bfb3bfcec28538c56c477ef745c0a",
+      "fingerprint": "3579364d2fbe708590a650b215f278c4ff1c5aa8",
+      "host": "keybase.io",
+      "key_id": "15f278c4ff1c5aa8",
+      "kid": "010122b438d333c6d8f085f55a2a1aa42ba2e4cc7caed9ff8465f461a9de1d5e8f970a",
+      "uid": "7a76f976fba56153bc6a7766c7975019",
+      "username": "dannychain"
+    },
+    "service": {
+      "hostname": "votify.now.sh",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "ctime": 1613674486,
+  "expire_in": 157680000,
+  "prev": "6b2d41247e598bf59d6718fdc19d132857ded99c642f815f34f16fc85f19f0c8",
+  "seqno": 18,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.1.13
+Comment: https://keybase.io/crypto
+
+yMN3AnicbVJtUFRVGF4kBFcYIYe2TMi5Y8xE7LL369x7oQkGYbQmS0rMZIHu11ku
+sHeX3WU/QkLJIhloJscpc5ugoQIFnWkVtVJKsaJoEohPkQyBoMxBl6YERDrL6L/O
+nzvnvc/zvM953vdiVKhGGxIb8FxcWr+rOaTrvK9M86rh9D/lmGCVvFhKOVYsL3/k
+Ekl2OAuKFQlLwYw4YRRZggIsT0hGnIYcJHBJhpADBCkBKIoEJXEUwwpQIAUoyiLB
+0iQr0kCkGEaGDEWLRh5LwqCimmW7za6oTiRL0gxHAkoioCAzRpbmjDygjQKBGhAM
+K1IQ4iLN8ywiFlodQQYyJ/AO2aBYUQ1dCpbt/Q/+vm/knBAokpVIkhSBxELUBtI0
+T/A4z1OEwBMyJYqMyMsSByFLARpSAOc5ScYlWmYhxyz7LluWY3gGoAqAAk8DnCYF
+EfAMA4DIcAxtxLkg0CHbVd4iI7TEq6pXLOQVFatIwlDdpYhyMNrgW+5hXFanAr0G
+1eo2OAoR3Wa3Oq2itQT9KnQ6bY6UINXptQWxblkouKdSICiqhKJEDJdsdyhWFUvB
+EVJ0KkFZHOAkYCiKBUmY7LEpdrlACSJoBrBGdIJ9ZBeSBAIhUThBMTLNodnRnAQY
+nIWSiHMSTqIZMhLKhRMBRUAWpUxSEEfTRhHiHEQbgQXfVapakTaLfPJmpOlQzCrv
+LLPLWMWF86YHNCFazcqwFcEd02hXRd/fPFNMtKb/lGkibvqXdVr3mqL0UlcynhBm
+6ezYfzl79rWxL4XGvI7T0W3gUpt/bcDfS47rmm7PjMeHP5T/gYnIb29Kmznxbaqj
+Z3P3xKl0dUFfNxjl25Li1nlXn9z80zO1v9tqD06feylnaTJ+zvdzfctzJ7o/31bf
+n9GTPvzWgmdovGPkU6HCbzRPgHemkhtjEhbSHdUbR5+I2KgrhrcMKxpWdWhyEiP2
+pms/snAVkaYPW0fwI7nGob8ofxYoT9xa/3XPyrbHm3474vvY512IPVxT9O/3oQ3t
+8aFFgZiq8IzGkcGxy/lzfTlTkx6TPXDjbtkxKI0yx/pud8UZDJasHzac2fPgixu6
+n6/Jz8pqfq8m9ZH1hxYqybtfRWfOZ7wfwpWn6o6X6nyBIeZ1/EbDaHPJLnfmDn3o
++N93yDxz7+DBNfN5P878erV1z6Nz+/dpWs6lFcHWppfPRNyy/rH7C9++F+6kzufs
+Prv3wtlrM5GVtq6Wa707vJ9MbOu8LvdXkbB1EehDPvMvjW4/PDD8dEKhZ/V4bkTA
+7P/uysOuA8PZkW87tLq+k1VK80jmY0+tS5swX4Fb2dJs9dm52APXo96derKz4egm
+Y5gufDLxkO64afFmu8VfXZ/srrxZ8c2Ad/uYfqdFX91QWzc9m+m5WnVUn/ankh94
+U3hjUxy5c6Busiy32rw249Irs4v/ARpAzCQ=
+=3tWm
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/dannychain
+
+==================================================================
