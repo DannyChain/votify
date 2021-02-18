@@ -34,9 +34,8 @@ const Voter: React.FC<IUserProps> = ({
           width="200px"
           height="200px"
           style={{ borderRadius: "50%" }}
+          className={styles.image}
         />
-
-        <br />
 
         <h1 className={styles.title}>
           Vote for{" "}
@@ -104,7 +103,6 @@ const Voter: React.FC<IUserProps> = ({
             <div />
           )}
           <p className={styles.description}>{userdata.about}</p>
-          <br />
         </div>
 
         {witnessInfo ? (
@@ -115,7 +113,7 @@ const Voter: React.FC<IUserProps> = ({
               placeholder="Your Username"
             />
 
-            <h2>Vote using:</h2>
+            <h2 className={styles.h2}>Vote using:</h2>
 
             <button
               className={styles.card}
