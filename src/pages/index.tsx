@@ -38,6 +38,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
         witnessInfo: "",
         witnessStatus: "",
       },
+      revalidate: 60,
     };
   }
 
@@ -49,6 +50,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
         witnessInfo,
         witnessStatus: "",
       },
+      revalidate: 60,
     };
   }
 
@@ -61,6 +63,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       witnessInfo,
       witnessStatus,
     },
+    revalidate: 60,
   };
 };
 
