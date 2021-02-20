@@ -150,7 +150,7 @@ const Voter: React.FC<IUserProps> = ({
         >
           <strong> DannyChain </strong>
         </a>
-        and heavly inspired on{" "}
+        and heavily inspired on{" "}
         <a
           href="https://hivel.ink/@cadawg"
           target="_blank"
