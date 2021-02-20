@@ -17,7 +17,7 @@ const Loading: React.FC = () => {
       <footer className={styles.footer}>
         Created by
         <a
-          href="https://peakd.com/@dannychain"
+          href="https://hivel.ink/@dannychain"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -25,7 +25,7 @@ const Loading: React.FC = () => {
         </a>
         and heavly inspired on{" "}
         <a
-          href="https://peakd.com/@cadawg"
+          href="https://hivel.ink/@cadawg"
           target="_blank"
           rel="noopener noreferrer"
         >

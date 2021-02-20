@@ -40,7 +40,7 @@ const Voter: React.FC<IUserProps> = ({
         <h1 className={styles.title}>
           Vote for{" "}
           <a
-            href={`https://peakd.com/@${username}`}
+            href={`https://hivel.ink/@${username}`}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -89,7 +89,7 @@ const Voter: React.FC<IUserProps> = ({
                   <span key={owner}>
                     {" "}
                     <a
-                      href={`https://peakd.com/@${owner}`}
+                      href={`https://hivel.ink/@${owner}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -144,7 +144,7 @@ const Voter: React.FC<IUserProps> = ({
       <footer className={styles.footer}>
         Created by
         <a
-          href="https://peakd.com/@dannychain"
+          href="https://hivel.ink/@dannychain"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -152,7 +152,7 @@ const Voter: React.FC<IUserProps> = ({
         </a>
         and heavly inspired on{" "}
         <a
-          href="https://peakd.com/@cadawg"
+          href="https://hivel.ink/@cadawg"
           target="_blank"
           rel="noopener noreferrer"
         >
