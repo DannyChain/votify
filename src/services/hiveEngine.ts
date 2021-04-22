@@ -1,6 +1,6 @@
 export const getWitnessList = async () => {
   try {
-    const data = await fetch(`https://votify.now.sh/api/witnessList`);
+    const data = await fetch(`https://votify-dannychain.vercel.app/api/witnessList`);
 
     const json = await data.json();
 
@@ -21,7 +21,7 @@ export const getWitnessList = async () => {
 export const getWitnessInfo = async (witness) => {
   try {
     const data = await fetch(
-      `https://votify.now.sh/api/witnessInfo?witness=${witness}`
+      `https://votify-dannychain.vercel.app/api/witnessInfo?witness=${witness}`
     );
 
     const json = await data.json();
@@ -35,7 +35,7 @@ export const getWitnessInfo = async (witness) => {
 export const getWitnessStatus = async (witnessInfo) => {
   try {
     const data = await fetch(
-      `https://votify.now.sh/api/witnessStatus?ip=${witnessInfo.IP}&port=${witnessInfo.RPCPort}`
+      `https://votify-dannychain.vercel.app/api/witnessStatus?ip=${witnessInfo.IP}&port=${witnessInfo.RPCPort}`
     );
 
     const json = await data.json();
