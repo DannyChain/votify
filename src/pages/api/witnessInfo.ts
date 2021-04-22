@@ -13,9 +13,7 @@ export default async (request: NowRequest, response: NowResponse) => {
   }
 
   const data = await fetch(
-    `${process.env.WITNESS_URL_PROTOCOL || "http"}://${
-      process.env.WITNESS_NODE_IP || "35.188.146.63"
-    }:${process.env.WITNESS_NODE_PORT || "5000"}/contracts`,
+    `https://api.hive-engine.com/rpc/contracts`,
     {
       headers: {
         "content-type": "application/json",
@@ -23,7 +21,7 @@ export default async (request: NowRequest, response: NowResponse) => {
       body:
         '{"jsonrpc":"2.0","method":"find","params":{"contract":"witnesses","table":"witnesses","query":{"account":"' +
         witness +
-        '"}},"id": 9}',
+        '"}},"id": 1}',
       method: "POST",
     }
   );
